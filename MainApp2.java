@@ -157,7 +157,7 @@ public class MainApp2 {
     private static void printArr(int[][] arrDbl) {
         int b,c;
         for(b=0;b<arrDbl.length;b++){
-            for(c=0;c<=b;c++){
+            for(c=0;c< arrDbl.length;c++){
                 System.out.print(arrDbl[b][c]);
             }System.out.println();
         }
