@@ -90,6 +90,17 @@ class Dog extends Animal {
             super.swim(swimDistance);
         }
     }
+
+    public void run(int runDistance, int maxDistance) {
+        name = getDogName();
+        if(runDistance>maxDistance) {
+            System.out.printf("Собака %s пробежала %d метров,\n а оставшиеся %d метров бежать отказалась.\n", name, maxDistance, (runDistance - maxDistance));
+        } else {
+            System.out.printf("Собака %s. ", name);
+            super.run(runDistance);
+        }
+        System.out.println("Max distance: "+maxDistance);
+    }
 }
 
 public class Program {
@@ -106,16 +117,24 @@ public class Program {
         cat2.catInfo();
         Dog dog1 = new Dog("Бобик");
         dog1.dogInfo();
-        System.out.println("Животных: " + dog1.getCount());
+        Dog dog2 = new Dog("Шарик");
+        dog2.dogInfo();
+        Dog dog3 = new Dog("Чарик");
+        dog3.dogInfo();
+        System.out.println("Животных: " + dog3.getCount());
         do {
             System.out.println("Сколько бежать?");
             runDistance = scanner.nextInt();
             cat1.run(runDistance);
             dog1.run(runDistance);
+            dog2.run(runDistance,400);
+            dog3.run(runDistance,600);
             System.out.println("Сколько плыть?");
             swimDistance = scanner.nextInt();
             cat1.swim(swimDistance);
             dog1.swim(swimDistance);
+            dog2.swim(swimDistance);
+            dog3.swim(swimDistance);
             System.out.println("Выходим? Y/N");
             userAnswer = scanner.next();
         } while (!userAnswer.equals("y")&&!userAnswer.equals("Y"));
@@ -127,5 +146,7 @@ public class Program {
     //У каждого животного есть ограничения на действия
     // (бег: кот 200 м., собака 500 м.; плавание: кот не умеет плавать, собака 10 м.).
     //* Добавить подсчет созданных котов, собак и животных.
+    //5. * Добавить животным разброс в ограничениях. То есть у одной собаки ограничение на бег
+    // может быть 400 м., у другой 600 м.
 
 }
