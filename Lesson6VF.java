@@ -6,8 +6,6 @@ class Animal {
     private String name;
     private String type;
     private int id;
-    private int maxRunDistance;
-    private int maxSwimDistance;
     static int counter = 1;
 
     public Animal(String name, String type) {
@@ -33,33 +31,6 @@ class Animal {
         return type;
     }
 
-    public void setMaxRunDistance(int maxR) {
-        maxRunDistance = maxR;
-    }
-
-    public void setMaxSwimDistance(int maxS) {
-        maxSwimDistance = maxS;
-    }
-
-    public int getMaxRunDistance() {
-        return maxRunDistance;
-    }
-
-    public int getMaxSwimDistance() {
-        return maxSwimDistance;
-    }
-
-    public void run(int runDistance) {
-        name = getAnimalName();
-        type = getAnimalType();
-        maxSwimDistance = getMaxRunDistance();
-        if (runDistance > maxRunDistance) {
-            System.out.printf("%s %s пробежал(а) %d метров и шмыгнул(а) в кусты,\n а оставшиеся %d метров никто не бежал.\n", type, name, maxRunDistance, (runDistance - maxRunDistance));
-        } else {
-            System.out.printf("%s %s, пробежал(а) %d метров.\n", type, name, runDistance);
-        }
-    }
-
     public void run(int runDistance, int maxRunDistance) {
         name = getAnimalName();
         type = getAnimalType();
@@ -71,10 +42,9 @@ class Animal {
         System.out.println("Max distance: " + maxRunDistance);
     }
 
-    public void swim(int swimDistance) {
+    public void swim(int swimDistance, int maxSwimDistance) {
         name = getAnimalName();
         type = getAnimalType();
-        maxSwimDistance = getMaxSwimDistance();
         if (swimDistance > maxSwimDistance) {
             System.out.printf("%s %s проплыл(а) %d метров,\n и вылез(ла) на берег. Оставшиеся %d метров никто не плыл.\n", type, name, maxSwimDistance, (swimDistance - maxSwimDistance));
         } else {
@@ -92,16 +62,6 @@ class Cat extends Animal {
 
     public int getMaxR() {
         return maxR;
-    }
-
-    public void setMaxRunDistance() {
-        int mr = getMaxR();
-        super.setMaxRunDistance(mr);
-    }
-
-    public void run(int runDistance) {
-        setMaxRunDistance();
-        super.run(runDistance);
     }
 
     public void swim(int swimDistance) {
@@ -126,26 +86,6 @@ class Dog extends Animal {
     public int getMaxS() {
         return maxS;
     }
-
-    public void setMaxRunDistance() {
-        int mr = getMaxR();
-        super.setMaxRunDistance(mr);
-    }
-
-    public void setMaxSwimDistance() {
-        int ms = getMaxS();
-        super.setMaxSwimDistance(ms);
-    }
-
-    public void run(int runDistance) {
-        setMaxRunDistance();
-        super.run(runDistance);
-    }
-
-    public void swim(int swimDistance) {
-        setMaxSwimDistance();
-        super.swim(swimDistance);
-    }
 }
 
 public class Lesson6VF {
@@ -169,16 +109,21 @@ public class Lesson6VF {
         do {
             System.out.println("Сколько бежать?");
             runDistance = scanner.nextInt();
-            cat1.run(runDistance);
-            dog1.run(runDistance);
+            int maxRunDistance = cat1.getMaxR();
+            cat1.run(runDistance, maxRunDistance);
+            cat2.run(runDistance, maxRunDistance);
+            maxRunDistance = dog1.getMaxR();
+            dog1.run(runDistance, maxRunDistance);
             dog2.run(runDistance, 400);
             dog3.run(runDistance, 600);
             System.out.println("Сколько плыть?");
             swimDistance = scanner.nextInt();
             cat1.swim(swimDistance);
-            dog1.swim(swimDistance);
-            dog2.swim(swimDistance);
-            dog3.swim(swimDistance);
+            cat2.swim(swimDistance);
+            int maxSwimDistance = dog1.getMaxS();
+            dog1.swim(swimDistance, maxSwimDistance);
+            dog2.swim(swimDistance, maxSwimDistance);
+            dog3.swim(swimDistance, maxSwimDistance);
             System.out.println("Выходим? Y/N");
             userAnswer = scanner.next();
         } while (!userAnswer.equals("y") && !userAnswer.equals("Y"));
