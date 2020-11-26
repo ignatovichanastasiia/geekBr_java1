@@ -17,6 +17,10 @@ class Animal {
         System.out.println("id " + id);
     }
 
+    public void animalInfo() {
+        System.out.printf("%s %s.\n", type, name);
+    }
+
     public int getCount() {
         return id;
     }
@@ -45,10 +49,6 @@ class Animal {
         return maxSwimDistance;
     }
 
-    public void animalInfo() {
-        System.out.printf("%s %s.\n", type, name);
-    }
-
     public void run(int runDistance) {
         name = getAnimalName();
         type = getAnimalType();
@@ -68,6 +68,7 @@ class Animal {
         } else {
             System.out.printf("%s %s, пробежал(а) %d метров.\n", type, name, runDistance);
         }
+        System.out.println("Max distance: " + maxRunDistance);
     }
 
     public void swim(int swimDistance) {
@@ -88,11 +89,6 @@ class Cat extends Animal {
     public Cat(String name, String type) {
         super(name, type);
     }
-
-    public void catInfo() {
-        super.animalInfo();
-    }
-
 
     public int getMaxR() {
         return maxR;
@@ -123,11 +119,6 @@ class Dog extends Animal {
         super(name, type);
     }
 
-    public void dogInfo() {
-        super.animalInfo();
-    }
-
-
     public int getMaxR() {
         return maxR;
     }
@@ -155,11 +146,6 @@ class Dog extends Animal {
         setMaxSwimDistance();
         super.swim(swimDistance);
     }
-
-    public void run(int runDistance, int maxOwnRunDistance) {
-        super.run(runDistance, maxOwnRunDistance);
-        System.out.println("Max distance: " + maxOwnRunDistance);
-    }
 }
 
 public class Lesson6VF {
@@ -170,15 +156,15 @@ public class Lesson6VF {
 
     public static void main(String[] args) {
         Cat cat1 = new Cat("Васька","Кот");
-        cat1.catInfo();
+        cat1.animalInfo();
         Cat cat2 = new Cat("Барсик","Кот");
-        cat2.catInfo();
+        cat2.animalInfo();
         Dog dog1 = new Dog("Бобик","Собака");
-        dog1.dogInfo();
+        dog1.animalInfo();
         Dog dog2 = new Dog("Шарик","Собака");
-        dog2.dogInfo();
+        dog2.animalInfo();
         Dog dog3 = new Dog("Чарик","Собака");
-        dog3.dogInfo();
+        dog3.animalInfo();
         System.out.println("Животных: " + dog3.getCount());
         do {
             System.out.println("Сколько бежать?");
@@ -209,4 +195,3 @@ public class Lesson6VF {
     // может быть 400 м., у другой 600 м.
 
 }
-
